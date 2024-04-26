@@ -12,7 +12,7 @@ export const Login = () => {
         <span class="pb-12">
           <Logo />
         </span>
-        <Card>
+        <Card class="w-[476px]">
           <Stack spacing="md">
             <Stack>
               <h1 class="text-4xl font-bold">Login</h1>
