@@ -11,7 +11,7 @@ export const Base = ({ children }) => (
         crossorigin="anonymous"
       ></script>
     </head>
-    <body hx-boost="true" class="bg-gray-100 flex justify-center items-center">
+    <body hx-boost="true" class="bg-off-white flex justify-center items-center">
       {children}
     </body>
   </html>
