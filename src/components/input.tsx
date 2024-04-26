@@ -6,6 +6,7 @@ type InputProps = {
   label: string;
   type?: 'text' | 'password';
   rightElement?: JSX.Element;
+  name?: string;
 };
 export const Input = ({
   label,
@@ -13,6 +14,7 @@ export const Input = ({
   defaultValue,
   type = 'text',
   rightElement,
+  name,
 }: InputProps) => {
   const inputClasses = clsx(
     'rounded-lg border-light-gray border-solid border p-3 placeholder-gray w-full text-black',
@@ -29,6 +31,7 @@ export const Input = ({
           </span>
         ) : null}
         <input
+          name={name}
           type={type}
           value={defaultValue}
           placeholder={placeholder}
