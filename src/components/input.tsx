@@ -22,9 +22,11 @@ export const Input = ({
   return (
     <label class="flex flex-col text-xs text-black gap-y-1 w-full">
       {label}
-      <div class="relative flex items-center">
+      <div class="relative flex items-center text-base">
         {rightElement ? (
-          <span class="h-4 w-4 ml-4 absolute text-gray">{rightElement}</span>
+          <span class="z-10 h-4 w-4 ml-4 absolute text-gray">
+            {rightElement}
+          </span>
         ) : null}
         <input
           type={type}
