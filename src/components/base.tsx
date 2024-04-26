@@ -1,4 +1,8 @@
-export const Base = ({ children }) => (
+type BaseProps = {
+  children: JSX.Element;
+};
+
+export const Base = ({ children }: BaseProps) => (
   <html>
     <head>
       <meta charset="UTF-8" />
