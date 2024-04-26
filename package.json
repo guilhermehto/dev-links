@@ -5,7 +5,9 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "bun run --watch src/index.ts",
     "db:generate": "drizzle-kit generate:sqlite",
-    "db:migrate": "bun run ./src/db/migrate.ts"
+    "db:migrate": "bun run ./src/db/migrate.ts",
+    "tw:generate": "tailwindcss -i ./src/global.css -o ./public/styles.css",
+    "tw:generate:watch": "bun tw:generate --watch"
   },
   "dependencies": {
     "@elysiajs/html": "^1.0.2",
