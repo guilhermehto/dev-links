@@ -1,5 +1,5 @@
 type BaseProps = {
-  children: JSX.Element;
+  children: JSX.Element | JSX.Element[];
 };
 
 export const Base = ({ children }: BaseProps) => (
