@@ -16,6 +16,9 @@ module.exports = {
       white: '#FFFFFF',
       red: '#FF3939',
     },
+    dropShadow: {
+      DEFAULT: '0 0 10px rgba(99, 60, 255, 0.25)',
+    },
   },
   plugins: [addDynamicIconSelectors()],
 };

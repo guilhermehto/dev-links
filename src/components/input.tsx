@@ -16,6 +16,7 @@ export const Input = ({
 }: InputProps) => {
   const inputClasses = clsx(
     'rounded-lg border-light-gray border-solid border p-3 placeholder-gray w-full text-black',
+    'focus:border-purple outline-none focus:drop-shadow',
     { 'pl-11': !!rightElement },
   );
   return (
