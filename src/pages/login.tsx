@@ -13,34 +13,38 @@ export const Login = () => {
           <Logo />
         </span>
         <Card class="w-[476px]">
-          <Stack spacing="md">
-            <Stack>
-              <h1 class="text-4xl font-bold">Login</h1>
-              <p class="text-gray">
-                Add your details below to get back into the app
+          <form hx-post="/login">
+            <Stack spacing="md">
+              <Stack>
+                <h1 class="text-4xl font-bold">Login</h1>
+                <p class="text-gray">
+                  Add your details below to get back into the app
+                </p>
+              </Stack>
+              <Input
+                label="Email address"
+                name="email"
+                placeholder="e.g. alex@email.com"
+                rightElement={
+                  <span class="icon-[ph--envelope-simple-fill] h-full w-full" />
+                }
+              />
+              <Input
+                label="Password"
+                name="password"
+                placeholder="Enter your password"
+                type="password"
+                rightElement={<span class="icon-[ph--lock-key-fill]" />}
+              />
+              <Button type="submit">Login</Button>
+              <p class="text-gray text-center">
+                Don't have an account?{' '}
+                <a href="/register" class="text-purple">
+                  Create account
+                </a>
               </p>
             </Stack>
-            <Input
-              label="Email address"
-              placeholder="e.g. alex@email.com"
-              rightElement={
-                <span class="icon-[ph--envelope-simple-fill] h-full w-full" />
-              }
-            />
-            <Input
-              label="Password"
-              placeholder="Enter your password"
-              type="password"
-              rightElement={<span class="icon-[ph--lock-key-fill]" />}
-            />
-            <Button>Login</Button>
-            <p class="text-gray text-center">
-              Don't have an account?{' '}
-              <a href="/register" class="text-purple">
-                Create account
-              </a>
-            </p>
-          </Stack>
+          </form>
         </Card>
       </div>
     </Base>
