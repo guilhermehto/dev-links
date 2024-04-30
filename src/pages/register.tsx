@@ -5,7 +5,12 @@ import { Input } from '../components/input';
 import { Logo } from '../components/logo';
 import { Stack } from '../components/stack';
 
-export const Register = () => {
+type RegisterProps = {
+  validation?: Record<string, string | undefined>;
+  defaultValues?: Record<string, string>;
+};
+
+export const Register = ({ validation, defaultValues }: RegisterProps) => {
   return (
     <Base>
       <div class="flex flex-col items-center">
@@ -13,7 +18,7 @@ export const Register = () => {
           <Logo />
         </span>
         <Card class="w-[476px]">
-          <form hx-post="/register">
+          <form hx-post="/register" hx-target="body">
             <Stack spacing="md">
               <Stack>
                 <h1 class="text-4xl font-bold">Create account</h1>
@@ -23,6 +28,8 @@ export const Register = () => {
               </Stack>
               <Input
                 name="email"
+                validationMessage={validation?.email ?? undefined}
+                defaultValue={defaultValues?.email}
                 label="Email address"
                 placeholder="e.g. alex@email.com"
                 rightElement={
@@ -31,6 +38,8 @@ export const Register = () => {
               />
               <Input
                 name="password"
+                validationMessage={validation?.password ?? undefined}
+                defaultValue={defaultValues?.password}
                 label="Create password"
                 placeholder="At least 8 characters"
                 type="password"
@@ -38,6 +47,8 @@ export const Register = () => {
               />
               <Input
                 name="confirm"
+                validationMessage={validation?.confirm ?? undefined}
+                defaultValue={defaultValues?.confirm}
                 label="Confirm password"
                 placeholder="At least 8 characters"
                 type="password"

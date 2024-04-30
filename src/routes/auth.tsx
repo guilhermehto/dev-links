@@ -26,17 +26,67 @@ type LoginRequest = Context & {
 
 const handleRegister = async ({ body, cookie, set }: RegisterRequest) => {
   const { email, password, confirm } = body;
-  if (!email || !password || !confirm) {
+  if (
+    typeof email !== 'string' ||
+    typeof password !== 'string' ||
+    typeof confirm !== 'string'
+  ) {
+    set.status = 400;
     return;
   }
 
-  // TODO: Validate body properly
+  const getPasswordValidation = () => {
+    if (!password) return "Can't be empty";
+    if (password.length < 6) return 'Minimun of 6 characters';
+  };
+
+  const getConfirmValidation = () => {
+    if (!confirm) return "Can't be empty";
+    if (confirm !== password) return 'Not matching';
+  };
+
+  const getEmailValidation = () => {
+    if (!email) return "Can't be empty";
+    if (!email.includes('@')) return 'Not an email';
+  };
+
+  const passwordValidation = getPasswordValidation();
+  const emailValidation = getEmailValidation();
+  const confirmValidation = getConfirmValidation();
+
+  if (!!passwordValidation || !!emailValidation || !!confirmValidation) {
+    set.status = 422;
+    return (
+      <Register
+        defaultValues={{
+          email,
+          password,
+          confirm,
+        }}
+        validation={{
+          email: emailValidation,
+          password: passwordValidation,
+          confirm: confirmValidation,
+        }}
+      />
+    );
+  }
 
   const existingUser = await usersService.getByEmail(email);
-  console.log('existing user?', existingUser);
   if (existingUser) {
-    // TODO: handle existing user
-    return;
+    set.status = 422;
+    return (
+      <Register
+        defaultValues={{
+          email,
+          password,
+          confirm,
+        }}
+        validation={{
+          email: 'User already exists',
+        }}
+      />
+    );
   }
 
   const hashedPassword = await new Argon2id().hash(password);
