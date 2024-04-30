@@ -109,14 +109,54 @@ const handleRegister = async ({ body, cookie, set }: RegisterRequest) => {
 
 const handleLogin = async ({ body, cookie, set }: LoginRequest) => {
   const { email, password } = body;
-  // TODO: Validate body properly
-  if (!email || !password) {
+  if (typeof email !== 'string' || typeof password !== 'string') {
+    set.status = 400;
     return;
+  }
+
+  const getPasswordValidation = () => {
+    if (!password) return "Can't be empty";
+  };
+
+  const getEmailValidation = () => {
+    if (!email) return "Can't be empty";
+    if (!email.includes('@')) return 'Not an email';
+  };
+
+  const passwordValidation = getPasswordValidation();
+  const emailValidation = getEmailValidation();
+
+  if (!!passwordValidation || !!emailValidation) {
+    set.status = 422;
+    return (
+      <Login
+        defaultValues={{
+          email,
+          password,
+        }}
+        validation={{
+          email: emailValidation,
+          password: passwordValidation,
+        }}
+      />
+    );
   }
 
   const existingUser = await usersService.getByEmail(email);
   if (!existingUser) {
-    return;
+    set.status = 422;
+    return (
+      <Login
+        defaultValues={{
+          email,
+          password,
+        }}
+        validation={{
+          email: 'Invalid user or password',
+          password: 'Invalid user or password',
+        }}
+      />
+    );
   }
 
   const validPassword = await new Argon2id().verify(
@@ -125,8 +165,19 @@ const handleLogin = async ({ body, cookie, set }: LoginRequest) => {
   );
 
   if (!validPassword) {
-    console.log('returning, invalid password');
-    return;
+    set.status = 401;
+    return (
+      <Login
+        defaultValues={{
+          email,
+          password,
+        }}
+        validation={{
+          email: 'Invalid user or password',
+          password: 'Invalid user or password',
+        }}
+      />
+    );
   }
 
   const session = await lucia.createSession(existingUser.id, {});

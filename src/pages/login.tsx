@@ -5,7 +5,12 @@ import { Input } from '../components/input';
 import { Logo } from '../components/logo';
 import { Stack } from '../components/stack';
 
-export const Login = () => {
+type LoginProps = {
+  validation?: Record<string, string | undefined>;
+  defaultValues?: Record<string, string>;
+};
+
+export const Login = ({ validation, defaultValues }: LoginProps) => {
   return (
     <Base>
       <div class="flex flex-col items-center">
@@ -13,7 +18,7 @@ export const Login = () => {
           <Logo />
         </span>
         <Card class="w-[476px]">
-          <form hx-post="/login">
+          <form hx-post="/login" hx-target="body">
             <Stack spacing="md">
               <Stack>
                 <h1 class="text-4xl font-bold">Login</h1>
@@ -23,6 +28,8 @@ export const Login = () => {
               </Stack>
               <Input
                 label="Email address"
+                validationMessage={validation?.email}
+                defaultValue={defaultValues?.email}
                 name="email"
                 placeholder="e.g. alex@email.com"
                 rightElement={
@@ -31,6 +38,8 @@ export const Login = () => {
               />
               <Input
                 label="Password"
+                validationMessage={validation?.password}
+                defaultValue={defaultValues?.password}
                 name="password"
                 placeholder="Enter your password"
                 type="password"
