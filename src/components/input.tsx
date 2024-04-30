@@ -3,6 +3,7 @@ import clsx from 'clsx';
 type InputProps = {
   defaultValue?: string;
   placeholder?: string;
+  validationMessage?: string;
   label: string;
   type?: 'text' | 'password';
   rightElement?: JSX.Element;
@@ -15,11 +16,13 @@ export const Input = ({
   type = 'text',
   rightElement,
   name,
+  validationMessage,
 }: InputProps) => {
   const inputClasses = clsx(
     'rounded-lg border-light-gray border-solid border p-3 placeholder-gray w-full text-black',
     'focus:border-purple outline-none focus:drop-shadow',
     { 'pl-11': !!rightElement },
+    { 'border-red': !!validationMessage },
   );
   return (
     <label class="flex flex-col text-xs text-black gap-y-1 w-full">
@@ -37,6 +40,11 @@ export const Input = ({
           placeholder={placeholder}
           class={inputClasses}
         />
+        {validationMessage ? (
+          <span class="z-10 mr-4 right-0 absolute text-red text-xs">
+            {validationMessage}
+          </span>
+        ) : null}
       </div>
     </label>
   );
