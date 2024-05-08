@@ -3,7 +3,7 @@ import { LibSQLAdapter } from '@lucia-auth/adapter-sqlite';
 import { getClient } from '../db';
 
 export const adapter = new LibSQLAdapter(getClient(), {
-  user: 'user',
+  user: 'users',
   session: 'session',
 });
 
