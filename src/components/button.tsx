@@ -1,9 +1,9 @@
-import clsx from 'clsx';
+import { twMerge } from 'tailwind-merge';
 
 type ButtonProps = {
   children: string;
   type?: 'submit' | 'button';
-  variant?: 'default' | 'outline';
+  variant?: 'default' | 'outline' | 'link';
 };
 
 export const Button = ({
@@ -11,20 +11,19 @@ export const Button = ({
   type = 'button',
   variant = 'default',
 }: ButtonProps) => {
-  const classes = clsx(
-    'text-white rounded-lg py-2.5 px-7',
-    {
-      'bg-purple active:bg-purple-hover active:drop-shadow':
-        variant === 'default',
-    },
-    {
-      'border text-purple font-bold border-purple active:bg-purple-light':
-        variant === 'outline',
-    },
-  );
-
   return (
-    <button class={classes} type={type}>
+    <button
+      class={twMerge(
+        'text-white rounded-lg py-2.5 px-7',
+        variant === 'default' &&
+          'bg-purple active:bg-purple-hover active:drop-shadow',
+        variant === 'outline' &&
+          'border text-purple font-bold border-purple active:bg-purple-light',
+        variant === 'link' &&
+          'text-gray font-bold border-purple active:bg-purple-light',
+      )}
+      type={type}
+    >
       {children}
     </button>
   );
