@@ -1,6 +1,7 @@
 import { Lucia } from 'lucia';
 import { LibSQLAdapter } from '@lucia-auth/adapter-sqlite';
 import { getClient } from '../db';
+import { Cookie } from 'elysia';
 
 export const adapter = new LibSQLAdapter(getClient(), {
   user: 'users',
@@ -19,6 +20,14 @@ export const lucia = new Lucia(adapter, {
     };
   },
 });
+
+export const wipeSession = (cookie: Record<string, Cookie<any>>) => {
+  const sessionCookie = lucia.createBlankSessionCookie();
+  cookie[sessionCookie.name].set({
+    value: sessionCookie.value,
+    ...sessionCookie.attributes,
+  });
+};
 
 declare module 'lucia' {
   interface Register {
