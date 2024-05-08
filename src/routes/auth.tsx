@@ -188,12 +188,15 @@ const handleLogin = async ({ body, cookie, set }: LoginRequest) => {
     ...sessionCookie.attributes,
   });
 
-  console.log('logged in');
-
   set.redirect = '/';
 };
 
 export const authRouter = new Elysia()
+  .onBeforeHandle(({ auth, set }) => {
+    if (!!auth) {
+      return (set.redirect = '/');
+    }
+  })
   .get('login', Login)
   .post('login', handleLogin)
   .get('register', Register)
