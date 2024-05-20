@@ -6,6 +6,7 @@ module.exports = {
   theme: {
     extend: {},
     colors: {
+      inherit: 'inherit',
       purple: '#633CFF',
       'purple-hover': '#BEADFF',
       'purple-light': '#EFEBFF',
