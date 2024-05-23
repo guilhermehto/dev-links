@@ -197,6 +197,7 @@ export const authRouter = new Elysia()
       return (set.redirect = '/');
     }
   })
+
   .get('login', Login)
   .post('login', handleLogin)
   .get('register', Register)
