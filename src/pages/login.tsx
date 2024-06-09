@@ -19,6 +19,7 @@ export const Login = ({ validation, defaultValues }: LoginProps) => {
         </span>
         <Card class="w-[476px]">
           <form hx-post="/login" hx-target="body">
+            <div class="htmx-indicator">Loading</div>
             <Stack spacing="md">
               <Stack>
                 <h1 class="text-4xl font-bold">Login</h1>
