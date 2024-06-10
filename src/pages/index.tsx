@@ -5,6 +5,7 @@ import { Row } from '../components/row';
 import { Card } from '../components/card';
 import { Stack } from '../components/stack';
 import { Button } from '../components/button';
+import { LinkInput } from '../components/link-input';
 
 export const Index = async ({ cookie, auth }: Context) => {
   return (
@@ -17,31 +18,34 @@ export const Index = async ({ cookie, auth }: Context) => {
           </Card>
           <Stack class="flex-[3]">
             <Card class="flex-[3]">
-              <Stack>
-                <h1 class="text-3xl text-black font-bold">
-                  Customize your links
-                </h1>
-                <p class="text-gray">
-                  Add/edit/remove links below and then share all your profiles
-                  with the world!
-                </p>
-              </Stack>
-              <Button variant="outline" class="w-full mt-10">
-                + Add new link
-              </Button>
-              <Card variation="secondary">
-                <Stack spacing="lg" class="justify-center items-center flex">
-                  <Illustration />
-                  <h2 class="text-3xl text-black font-bold">
-                    Let's get you started
-                  </h2>
-                  <p class="text-gray text-center max-w-[488px]">
-                    Use the “Add new link” button to get started. Once you have
-                    more than one link, you can reorder and edit them. We’re
-                    here to help you share your profiles with everyone!
+              <Stack spacing="lg">
+                <Stack>
+                  <h1 class="text-3xl text-black font-bold">
+                    Customize your links
+                  </h1>
+                  <p class="text-gray">
+                    Add/edit/remove links below and then share all your profiles
+                    with the world!
                   </p>
                 </Stack>
-              </Card>
+                <Button variant="outline" class="w-full">
+                  + Add new link
+                </Button>
+                <LinkInput />
+                <Card variation="secondary">
+                  <Stack spacing="lg" class="justify-center items-center flex">
+                    <Illustration />
+                    <h2 class="text-3xl text-black font-bold">
+                      Let's get you started
+                    </h2>
+                    <p class="text-gray text-center max-w-[488px]">
+                      Use the “Add new link” button to get started. Once you
+                      have more than one link, you can reorder and edit them.
+                      We’re here to help you share your profiles with everyone!
+                    </p>
+                  </Stack>
+                </Card>
+              </Stack>
             </Card>
             <Card class="justify-end flex w-full">
               <Button>Save</Button>
